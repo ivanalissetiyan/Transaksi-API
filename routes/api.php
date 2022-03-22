@@ -20,12 +20,22 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/transaction', [TransactionController::class, 'index']);
-Route::post('/transaction', [TransactionController::class, 'store']);
-Route::get('transaction/{id}', [TransactionController::class, 'show']);
-Route::put('/transaction/{id}', [TransactionController::class, 'update']);
+// Route::get('/transaction', [TransactionController::class, 'index']);
+// Route::post('/transaction', [TransactionController::class, 'store']);
+// Route::get('transaction/{id}', [TransactionController::class, 'show']);
+// Route::put('/transaction/{id}', [TransactionController::class, 'update']);
+// Route::delete('/transaction/{id}', [TransactionController::class, 'destroy']);
+
+// Cara route resource yg lain
+// Route::resource('/transaction', TransactionController::class)->except(['create', 'edit']);
+
+// Cara route resource yg lain
+Route::resource('/transaction', TransactionController::class)->shallow()->only([
+    'index', 'show', 'store', 'destroy', 'update'
+]);
 
 
 // Get => menampilkan data
 // Post => menginput data
 // Put => mengupdate data
+// Delete => menghapus data
