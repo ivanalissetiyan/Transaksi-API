@@ -81,7 +81,12 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        //
+        $transaction = Transaction::findOrfail($id);
+        $response = [
+            'message' => 'Detail Data Transaksi',
+            'data' => $transaction
+        ];
+        return response()->json($response, HttpFoundationResponse::HTTP_OK);
     }
 
 
@@ -98,9 +103,9 @@ class TransactionController extends Controller
         $transaction = Transaction::findOrfail($id);
 
         $validator = Validator::make($request->all(), [
-            'title' => ['required'],
-            'amount' => ['required', 'numeric'],
-            'type' => ['required', 'in:expense,revenue'],
+            'title' => 'required|unique:transactions',
+            'amount' => 'required', 'numeric',
+            'type' => 'required', 'in:expense,revenue',
         ]);
 
         if ($validator->fails()) {

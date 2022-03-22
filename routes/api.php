@@ -22,4 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/transaction', [TransactionController::class, 'index']);
 Route::post('/transaction', [TransactionController::class, 'store']);
+Route::get('transaction/{id}', [TransactionController::class, 'show']);
 Route::put('/transaction/{id}', [TransactionController::class, 'update']);
+
+
+// Get => menampilkan data
+// Post => menginput data
+// Put => mengupdate data
